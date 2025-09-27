@@ -6,13 +6,14 @@ const doctorSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      index: true, // Helps with fast lookups
     },
     specialization: {
       type: String,
       required: true,
     },
     experience: {
-      type: Number, // years
+      type: Number, // in years
       required: true,
     },
     qualification: {
@@ -24,29 +25,19 @@ const doctorSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    schedule: [
-      {
-        day: String, // e.g., "Monday"
-        timeSlots: [String], // ["10:00-11:00", "2:00-3:00"]
-      },
-    ],
-    appointments: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Appointment",
-      },
-    ],
+schedule: {
+  startDate: Date,  // e.g. 2025-10-01
+  endDate: Date,    // e.g. 2025-10-31
+  days: [String],   // ["Monday", "Wednesday", "Friday"]
+  startTime: String, // "10:00"
+  endTime: String   // "16:00"
+},
     patients: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Patient",
       },
     ],
-    verificationStatus: {
-      type: String,
-      enum: ["pending", "approved", "rejected"],
-      default: "pending",
-    },
   },
   { timestamps: true }
 );

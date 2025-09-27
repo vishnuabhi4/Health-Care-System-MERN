@@ -1,8 +1,11 @@
+import { fetchUsersWithDetails } from "../services/userService.js";
 
-export const listAllUsers = async (req,res)=>{
-try {
-    res.send('users')
-} catch (error) {
-    console.log(error);
-}
-}
+export const getUsers = async (req, res) => {
+  try {
+    const users = await fetchUsersWithDetails();
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch users" });
+  }
+};
