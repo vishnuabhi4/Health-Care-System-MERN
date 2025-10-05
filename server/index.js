@@ -7,6 +7,7 @@ const app = express();
 
 app.use('/', (req, res, next) => {
   console.log('primary root');
+  res.send("success");
   next(); // important to not block following routes
 });
 app.use('/users',userRoutes)
