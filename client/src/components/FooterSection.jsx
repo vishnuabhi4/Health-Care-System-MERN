@@ -22,7 +22,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-white text-black">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -32,7 +32,7 @@ const Footer = () => {
             <div className="bg-blue-600 text-white px-3 py-1 rounded-lg font-bold text-xl mb-4 inline-block">
               HealthCare+
             </div>
-            <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+            <p className="text-black text-sm mb-6 leading-relaxed">
               Your trusted healthcare partner providing quality medical services, online consultations, 
               and comprehensive health solutions with expert doctors available 24/7.
             </p>
@@ -54,13 +54,13 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-lg mb-6 text-white">Quick Links</h3>
+            <h3 className="font-semibold text-lg mb-6 text-black">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <a 
                     href="#" 
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                    className="text-black hover:text-white transition-colors text-sm"
                   >
                     {link}
                   </a>
@@ -77,7 +77,7 @@ const Footer = () => {
                 <li key={index}>
                   <a 
                     href="#" 
-                    className="text-gray-400 hover:text-white transition-colors text-sm"
+                    className="text-black hover:text-white transition-colors text-sm"
                   >
                     {service}
                   </a>
@@ -93,7 +93,7 @@ const Footer = () => {
               <div className="flex items-start">
                 <Phone className="h-4 w-4 mr-3 mt-1 text-blue-400" />
                 <div>
-                  <p className="text-gray-400 text-sm">General Inquiries</p>
+                  <p className="text-black text-sm">General Inquiries</p>
                   <p className="text-white font-medium">+1 (555) 123-4567</p>
                 </div>
               </div>
@@ -101,7 +101,7 @@ const Footer = () => {
               <div className="flex items-start">
                 <Mail className="h-4 w-4 mr-3 mt-1 text-blue-400" />
                 <div>
-                  <p className="text-gray-400 text-sm">Email Us</p>
+                  <p className="text-black text-sm">Email Us</p>
                   <p className="text-white font-medium">info@healthcareplus.com</p>
                 </div>
               </div>
@@ -109,18 +109,18 @@ const Footer = () => {
               <div className="flex items-start">
                 <MapPin className="h-4 w-4 mr-3 mt-1 text-blue-400" />
                 <div>
-                  <p className="text-gray-400 text-sm">Visit Us</p>
+                  <p className="text-black text-sm">Visit Us</p>
                   <p className="text-white font-medium">123 Healthcare Ave</p>
-                  <p className="text-gray-400 text-sm">Medical City, MC 12345</p>
+                  <p className="text-black text-sm">Medical City, MC 12345</p>
                 </div>
               </div>
               
               <div className="flex items-start">
                 <Clock className="h-4 w-4 mr-3 mt-1 text-blue-400" />
                 <div>
-                  <p className="text-gray-400 text-sm">Working Hours</p>
+                  <p className="text-black text-sm">Working Hours</p>
                   <p className="text-white font-medium">24/7 Emergency</p>
-                  <p className="text-gray-400 text-sm">Mon-Fri: 8AM-8PM</p>
+                  <p className="text-black text-sm">Mon-Fri: 8AM-8PM</p>
                 </div>
               </div>
             </div>

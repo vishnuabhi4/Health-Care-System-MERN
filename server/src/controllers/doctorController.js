@@ -3,6 +3,19 @@ import {
   getAllDoctorsService,
   getDoctorByIdService,
 } from "../services/doctorService.js";
+import { getAvailableSlotsService } from "../services/getAvailableSlotsService.js";
+
+export const getAvailableSlots = async (req, res) => {
+  try {
+    const doctorId = req.params.id;
+
+    const available = await getAvailableSlotsService(doctorId);
+
+    res.json({ doctorId, available });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // POST /doctors
 

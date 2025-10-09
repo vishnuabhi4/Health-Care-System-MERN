@@ -8,12 +8,12 @@ export const register = async (req, res) => {
 
     // hide password from response
     const { password, ...safeUser } = user._doc;
-    //._doc _doc property of a Mongoose Document instance provides direct
+    //._doc property of a Mongoose Document instance provides direct
     //access to the underlying plain JavaScript object (POJO)
     //that contains the actual data stored in the database.
-
-    //The ...safeUser part collects all the remaining
-    //  properties except password into a new object.
+    console.log(user._doc);
+    //The ...safeUser part collects all the remaining properties except
+    // password into a new object. and create an object called safeUser.
     res.status(201).json({ message: "User registered", user: safeUser });
   } catch (err) {
     res.status(400).json({ error: err.message });

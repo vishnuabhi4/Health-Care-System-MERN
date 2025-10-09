@@ -47,3 +47,35 @@ POST
   }
 }
 
+## 
+{
+  "patient": "652f3a0a8b9c1f12d4a1b234", 
+  "doctor": "652f3b5d8b9c1f12d4a1b567",
+  "appointment": "652f3c7a8b9c1f12d4a1b890",
+  "diagnosis": "Acute Bronchitis",
+  "prescription": [
+    {
+      "medicine": "Amoxicillin 500mg",
+      "dosage": "1 capsule every 8 hours",
+      "duration": "7 days"
+    },
+    {
+      "medicine": "Paracetamol 500mg",
+      "dosage": "1 tablet every 6 hours as needed",
+      "duration": "5 days"
+    }
+  ],
+  "labTests": [
+    {
+      "testName": "CBC (Complete Blood Count)",
+      "result": "Normal",
+      "normalRange": "WBC 4,000–11,000/mcL"
+    },
+    {
+      "testName": "Chest X-ray",
+      "result": "Mild inflammation in bronchi",
+      "normalRange": "Clear lungs"
+    }
+  ],
+  "notes": "Patient advised to drink warm fluids and rest adequately."
+}
