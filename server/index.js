@@ -33,9 +33,10 @@ app.use(
   })
 );
 
-
-app.get('/', (req,res) => {
- res.send('primary route')
+app.use('/', (req, res, next) => {
+  console.log('primary root');
+  res.send("success");
+  next(); // important to not block following routes
 });
 
 // app.use((req, res, next) => {
