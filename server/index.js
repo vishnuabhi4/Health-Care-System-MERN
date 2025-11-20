@@ -30,7 +30,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://health-care-system-frontend.vercel.app"
+      "https://health-care-system-frontend-g7bz9f189.vercel.app/"
     ],
     credentials: true,
   })
