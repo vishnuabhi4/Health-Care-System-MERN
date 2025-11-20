@@ -30,12 +30,12 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://health-care-system-frontend-k6bzvrw2a.vercel.app",
+      "https://health-care-system-frontend.vercel.app"
     ],
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
 );
+
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok", message: "Backend is live!" });
