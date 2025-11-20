@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true, // important for refresh token cookies
 });
 
-// 🧩 Attach token to all outgoing requests
+//  Attach token to all outgoing requests
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -18,7 +18,7 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// 🧠 Handle token expiration automatically
+//  Handle token expiration automatically
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
