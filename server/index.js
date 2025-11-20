@@ -35,7 +35,7 @@ app.use(
 
 app.use('/', (req, res, next) => {
   console.log('primary root');
-  res.send("success");
+  res.send("Backend test pass");
   next(); // important to not block following routes
 });
 
