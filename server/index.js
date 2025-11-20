@@ -36,7 +36,10 @@ app.use(
   })
 );
 
-// force redeploy
+app.use("/", (req, res) => {
+  res.send("Backend test pass");
+});
+
 
 app.use("/api/payment", paymentRoutes);
 app.use("/api/auth",authRoute);//register/login user profile (user include patients,doctors and admins)
