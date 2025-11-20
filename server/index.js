@@ -36,10 +36,9 @@ app.use(
   })
 );
 
-app.use("/", (req, res) => {
-  res.send("Backend test pass");
+app.get("/health", (req, res) => {
+  res.json({ status: "ok", message: "Backend is live!" });
 });
-
 
 app.use("/api/payment", paymentRoutes);
 app.use("/api/auth",authRoute);//register/login user profile (user include patients,doctors and admins)
