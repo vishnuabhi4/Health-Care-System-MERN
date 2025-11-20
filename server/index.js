@@ -36,13 +36,7 @@ app.use(
   })
 );
 
-
-
-
-// app.use((req, res, next) => {
-//   console.log("Incoming:", req.method, req.url); //test routes
-//   next();
-// });
+// force redeploy
 
 app.use("/api/payment", paymentRoutes);
 app.use("/api/auth",authRoute);//register/login user profile (user include patients,doctors and admins)
