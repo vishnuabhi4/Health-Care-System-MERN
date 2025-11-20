@@ -7,21 +7,25 @@ export const getAvailableSlotsService = async (doctorId) => {
   const doctor = await Doctor.findById(doctorId);
   if (!doctor) throw new Error("Doctor not found");
 
-  const { startDate, endDate, days, startTime, endTime } = doctor.schedule;
+  const { startDate, endDate, days, startTime, endTime } = doctor.schedule; //from doctor schema 
 
-  // Step 1: Generate all dates between startDate and endDate for selected days
+  //  Generate all dates between startDate and endDate for selected days
   const slotDates = [];
   const currentDate = new Date(startDate);
+  // console.log("current date",currentDate);
+  //   console.log("current date + 1",currentDate+2);
 
   while (currentDate <= endDate) {
+  
     const dayName = currentDate.toLocaleDateString("en-US", { weekday: "long" });
+   
     if (days.includes(dayName)) {
       slotDates.push(new Date(currentDate));
     }
     currentDate.setDate(currentDate.getDate() + 1);
   }
 
-  // Step 2: Generate time slots for each date
+  //  Generate time slots for each date
   const generateTimeSlots = (start, end, interval = 30) => {
     const slots = [];
     let [hour, minute] = start.split(":").map(Number);

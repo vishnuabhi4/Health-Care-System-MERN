@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
 import LogoutButton from "./Buttons/LoggoutButton";
+import ButtonDashboard from "./Buttons/ButtonDashboard";
 
 const HeaderNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,36 +27,36 @@ const navigate = useNavigate();
             <a
               href="#"
               className="text-gray-900 hover:text-blue-600 transition-colors"
+              onClick={()=>{navigate('/')}}
             >
               Home
             </a>
             <a
               href="#"
               className="text-gray-700 hover:text-blue-600 transition-colors"
+              onClick={() => navigate("/find-doctor")}
             >
               Find Doctor
             </a>
             <a
               href="#"
               className="text-gray-700 hover:text-blue-600 transition-colors"
+              onClick={() => navigate("/hospitals")}
             >
               Hospitals
             </a>
             <a
               href="#"
               className="text-gray-700 hover:text-blue-600 transition-colors"
+              onClick={() => navigate("/lab")}
             >
               Lab
             </a>
+         
             <a
               href="#"
               className="text-gray-700 hover:text-blue-600 transition-colors"
-            >
-              Medicines
-            </a>
-            <a
-              href="#"
-              className="text-gray-700 hover:text-blue-600 transition-colors"
+              onClick={() => navigate("/contact")}
             >
               Contact
             </a>
@@ -67,13 +68,22 @@ const navigate = useNavigate();
             <span className="text-sm text-gray-600 hidden sm:inline">
               Emergency
             </span>
-            {!user ? (
-              <button onClick={()=>{navigate('/login')}} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                Login/Register
+            {!user ? (<><button onClick={()=>{navigate('/login')}} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                Login
               </button>
+              <button onClick={()=>{navigate('/register')}} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+               Register
+              </button>
+              </>
+              
+              
             ) : (
+              <>
               <LogoutButton />
+              <ButtonDashboard/>
+              </>
             )}
+           
             {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100"
@@ -82,7 +92,7 @@ const navigate = useNavigate();
               {isOpen ? (
                 <X className="h-6 w-6" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu width={24} height={24} className="h-6 w-6" />
               )}
             </button>
           </div>
@@ -117,12 +127,7 @@ const navigate = useNavigate();
             >
               Lab
             </a>
-            <a
-              href="#"
-              className="text-gray-700 hover:text-blue-600 transition-colors"
-            >
-              Medicines
-            </a>
+          
             <a
               href="#"
               className="text-gray-700 hover:text-blue-600 transition-colors"

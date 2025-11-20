@@ -23,11 +23,37 @@ export const registerUser = async (userData) => {
 };
 
 
+export const updateUser = async (userId, updateData) => {
+  // Destructure to handle password separately
+  const { username, email, password } = updateData;
+
+  // Find the user by ID
+  const user = await User.findById(userId);
+  if (!user) throw new Error("User not found");
+
+  // Update fields only if they are provided
+  if (username) user.username = username;
+  if (email) user.email = email;
+
+  // Handle password change safely
+  if (password) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+  }
+
+  // Save the updated user
+  const updatedUser = await user.save();
+
+  // Hide password before sending back
+  updatedUser.password = undefined;
+
+  return updatedUser;
+};
 
 // Generate tokens
 const generateAccessToken = (user) =>
   jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
+    expiresIn: "8h",
   });
 
 const generateRefreshToken = (user) =>

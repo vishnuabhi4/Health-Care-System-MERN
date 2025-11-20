@@ -42,14 +42,14 @@ const HeroSection = () => {
                   <div className="w-16 h-16 bg-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                     <div className="w-8 h-8 bg-white rounded-full"></div>
                   </div>
-                  <p className="text-gray-700 font-medium">Professional Healthcare</p>
+                 
                 </div>
               </div>
               <div className="absolute top-4 right-4 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
                 Online Consultation Available
               </div>
               <div className="absolute bottom-5 bg-blue-500 text-white p-1 px-12 rounded-3xl shadow-lg animate-pulse">
-                <div className="text-sm font-semibold">Sample data</div>
+                <div className="text-sm font-semibold">Healthcare solutions</div>
               </div>
             </div>
           </div>

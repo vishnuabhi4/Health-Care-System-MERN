@@ -1,6 +1,5 @@
 export const errorHandler = (err,req,res,next)=>{
-    console.log(err.stack)
-
+    console.log("err",err.stack)
     const statusCode = err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 console.log('message')
@@ -11,4 +10,4 @@ console.log('message')
          
         //spread operator(...)If the condition is true, merge { stack: err.stack } into the object.
     })
-}
+} 

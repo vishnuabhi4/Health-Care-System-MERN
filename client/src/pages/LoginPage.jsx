@@ -14,6 +14,7 @@ const LoginPage = () => {
   });
 
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,11 +22,15 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const res = await axiosInstance.post("/auth/login", formData);
-      const { userId, role, accessToken } = res.data;
-
-      const user = { userId, role };
+      const res = await axiosInstance.post("/auth/login", formData, {
+        withCredentials: true,
+      });
+      const { userId, role, username, accessToken } = res.data;
+     
+      
+      const user = { userId, role, username };
       // Save token & user
       localStorage.setItem("token", accessToken);
       localStorage.setItem("user", JSON.stringify(user));
@@ -41,6 +46,8 @@ const LoginPage = () => {
     } catch (error) {
       console.error(error);
       alert(error.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -62,8 +69,11 @@ const LoginPage = () => {
           onChange={handleChange}
           className="w-full mb-3 p-2 border rounded"
         />
-        <button className="w-full bg-green-500 text-white py-2 rounded">
-          Login
+        <button
+          className="w-full bg-green-500 text-white py-2 rounded disabled:opacity-60"
+          disabled={loading}
+        >
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
       {message && <p className="mt-3 text-center text-gray-700">{message}</p>}

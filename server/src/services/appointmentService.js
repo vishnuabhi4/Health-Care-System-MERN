@@ -1,6 +1,7 @@
 // services/appointmentService.js
 import appointmentModel from "../models/appointmentModel.js";
 import Doctor from "../models/doctorModel.js";
+import User from "../models/userModel.js";
 
 export const createAppointmentService = async (doctorId, patientId, date, timeSlot) => {
   // 1. Check if doctor exists
@@ -18,12 +19,47 @@ export const createAppointmentService = async (doctorId, patientId, date, timeSl
   return appointment;
 };
 
+
+
+
 export const getAppointmentsByDoctorService = async (doctorId) => {
-return appointmentModel.find({ doctorId }).populate("patientId", "name email");
+  // First populate the patient itself
+  const appointments = await appointmentModel
+    .find({ doctorId })
+    .populate("patientId") // This ensures we can access patientId.userId
+    .exec();
+
+  // Now fetch the user details safely
+  const result = await Promise.all(
+    appointments.map(async (appt) => {
+      const patient = appt.patientId;
+
+      // if patient or userId not present, skip
+      if (!patient || !patient.userId) {
+        return {
+          ...appt.toObject(),
+          patientUser: null,
+        };
+      }
+
+      const user = await User.findById(patient.userId).select("username email");
+      return {
+        ...appt.toObject(),
+        patientUser: user,
+      };
+    })
+  );
+
+  return result;
 };
 
+
+
 export const getAppointmentsByPatientService = async (patientId) => {
-  return appointmentModel.find({ patientId }).populate("doctorId", "specialization");
+  return appointmentModel
+    .find({ patientId })
+    .populate("doctorId", "name specialization");
+
 };
 
 export const cancelAppointmentService = async (appointmentId, patientId) => {

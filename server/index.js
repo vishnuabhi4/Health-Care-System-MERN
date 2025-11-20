@@ -10,14 +10,17 @@ import doctorRoutes from './src/routes/doctorRoutes.js'
 import adminRoutes from './src/routes/adminRoutes.js'
 import appoinmentsRoutes from './src/routes/appointmentRoutes.js'
 import medicalReportRoutes from './src/routes/medicalReportRoute.js'
-
+import patientRoutes from './src/routes/patientRoutes.js'
+import paymentRoutes from "./src/routes/paymentRoutes.js"
+import contactRoutes from "./src/routes/contactRoutes.js"
 
 dotenv.config();
 
-console.log(process.env.PORT);
-
 const app = express();
 connectDB();
+
+
+
 
 // Middlewares
 app.use(express.json());
@@ -35,12 +38,20 @@ app.get('/', (req,res) => {
  res.send('primary route')
 });
 
+// app.use((req, res, next) => {
+//   console.log("Incoming:", req.method, req.url); //test routes
+//   next();
+// });
+
+app.use("/api/payment", paymentRoutes);
 app.use("/api/auth",authRoute);//register/login user profile (user include patients,doctors and admins)
 app.use('/api/users',userRoutes);//user CRUD...
 app.use('/api/admin/users',adminRoutes); //creating doctor profiles(admin access only)
-app.use("/api/admin/doctorinfo", doctorRoutes);//doctor profile info update 
+app.use("/api/admin/doctorinfo", doctorRoutes);//doctor profile info update and Appointment booking
 app.use("/api/appointments", appoinmentsRoutes);
-app.use("/api/medicalreport",medicalReportRoutes)
+app.use("/api/medicalreport",medicalReportRoutes)//patient report creation for doctor
+app.use('/api/patient',patientRoutes) //patient creating their own data.
+app.use("/api", contactRoutes);
 
 
 app.use(errorHandler);//error handler as the last middleware

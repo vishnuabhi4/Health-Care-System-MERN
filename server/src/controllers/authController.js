@@ -1,4 +1,4 @@
-import { registerUser, loginUser, refreshAccessToken, logoutUser } from "../services/authService.js";
+import { registerUser, loginUser, refreshAccessToken, logoutUser, updateUser } from "../services/authService.js";
 
 export const register = async (req, res) => {
 
@@ -11,12 +11,47 @@ export const register = async (req, res) => {
     //._doc property of a Mongoose Document instance provides direct
     //access to the underlying plain JavaScript object (POJO)
     //that contains the actual data stored in the database.
-    console.log(user._doc);
     //The ...safeUser part collects all the remaining properties except
     // password into a new object. and create an object called safeUser.
     res.status(201).json({ message: "User registered", user: safeUser });
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+}; 
+
+export const registerUserController = async (req, res) => {
+  try {
+    const newUser = await registerUser(req.body);
+    res.status(201).json({
+      message: "User registered successfully",
+      user: {
+        _id: newUser._id,
+        username: newUser.username,
+        email: newUser.email,
+        role: newUser.role,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const updateUserController = async (req, res) => {
+  try {
+    const userId = req.user._id; // from authenticate middleware
+    const updatedUser = await updateUser(userId, req.body);
+
+    res.status(200).json({
+      message: "User updated successfully",
+      user: {
+        _id: updatedUser._id,
+        username: updatedUser.username,
+        email: updatedUser.email,
+        role: updatedUser.role,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -28,14 +63,16 @@ export const login = async (req, res) => {
     // Send refresh token in httpOnly cookie
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      // secure: process.env.NODE_ENV === "production",
+      secure: false,            // must be false for localhost
+      sameSite: "lax",          //recommended for SPA refresh flow
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
     res.status(200).json({ 
       userId: user._id, 
-      role: user.role, 
+      role: user.role,
+      username:user.username, 
       accessToken 
     });
   } catch (err) {

@@ -43,7 +43,7 @@ const Footer = () => {
                 <a 
                   key={index}
                   href={social.href} 
-                  className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
+                  className="w-10 h-10bg-white text-dark  rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
@@ -159,7 +159,7 @@ const Footer = () => {
             {specialties.map((specialty, index) => (
               <span 
                 key={index}
-                className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm hover:bg-gray-700 cursor-pointer transition-colors"
+                className="bg-white text-dark px-3 py-1 rounded-full text-sm hover:bg-gray-700 cursor-pointer transition-colors"
               >
                 {specialty}
               </span>
@@ -186,23 +186,7 @@ const Footer = () => {
       </div>
 
       {/* Floating Action Buttons - Emergency Contact */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <div className="space-y-3">
-          <a 
-            href="tel:911"
-            className="block w-14 h-14 bg-red-600 rounded-full shadow-lg hover:bg-red-700 transition-colors flex items-center justify-center hover:scale-110 transform duration-200"
-            title="Emergency Call"
-          >
-            <Phone className="h-6 w-6 text-white" />
-          </a>
-          <button 
-            className="block w-14 h-14 bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 transition-colors flex items-center justify-center hover:scale-110 transform duration-200"
-            title="Book Appointment"
-          >
-            <Mail className="h-6 w-6 text-white" />
-          </button>
-        </div>
-      </div>
+     
     </footer>
   );
 };

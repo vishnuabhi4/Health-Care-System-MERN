@@ -17,10 +17,10 @@ const LogoutButton = () => {
 
       localStorage.removeItem("token"); // localStorage → ensures user is logged out even after page refresh.
       localStorage.removeItem("user");
-
-    //   navigate("/login"); // redirect to login
+      
+      navigate("/login"); 
     } catch (error) {
-      console.error("Logout failed:", error);
+      
       alert("Something went wrong while logging out!");
     }
   };

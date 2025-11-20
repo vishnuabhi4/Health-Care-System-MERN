@@ -5,18 +5,25 @@ import {
   getAppointmentsByDoctor,
   getAppointmentsByPatient,
   cancelAppointment,
+  getAllAppointments
 } from "../controllers/appointmentController.js";
 import { authenticate } from "../middlewares/authMiddleware.js";
+import { authorizeRoles } from "../middlewares/roleMiddleware.js";
 
 const router = express.Router();
+
+
 
 // Patients create appointment
 router.post("/", authenticate, createAppointment);
 
+// Get all appointments
+router.get("/", authenticate,authorizeRoles('admin'), getAllAppointments);
+
 // Patients get their own appointments
 router.get("/my", authenticate, getAppointmentsByPatient);
 
-// Doctors (or admins) get appointments for a doctor
+// fetch doctor appointments
 router.get("/doctor/:doctorId", authenticate, getAppointmentsByDoctor);
 
 // Cancel appointment

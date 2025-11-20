@@ -1,26 +1,30 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/api", // adjust if needed
-  withCredentials: true, // important to send cookies (for refresh token)
+  baseURL: "http://localhost:5000/api",
+  withCredentials: true, // important for refresh token cookies
 });
 
-// Intercept requests to attach access token
+// 🧩 Attach token to all outgoing requests
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
-    if (token) config.headers.Authorization = `Bearer ${token}`;
+    if (token) {
+      config.headers = config.headers || {}; // ensure headers exist
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => Promise.reject(error)
 );
 
-// Intercept responses — refresh token when expired
+// 🧠 Handle token expiration automatically
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
+    // Only handle 401 errors (unauthorized)
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -28,14 +32,21 @@ axiosInstance.interceptors.response.use(
         const res = await axiosInstance.get("/auth/refresh");
         const newAccessToken = res.data.accessToken;
 
-        // Save new token
+        if (!newAccessToken) throw new Error("No access token returned");
+
+        //  Save new token
         localStorage.setItem("token", newAccessToken);
 
-        // Update header and retry original request
+        //  Ensure headers exist before updating Authorization
+        originalRequest.headers = originalRequest.headers || {};
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+
+        // Retry the original failed request with the new token
         return axiosInstance(originalRequest);
       } catch (refreshError) {
         console.error("Token refresh failed:", refreshError);
+
+        // Logout and redirect if refresh fails
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         window.location.href = "/login";

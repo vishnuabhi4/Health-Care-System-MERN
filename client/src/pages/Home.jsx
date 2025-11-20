@@ -12,7 +12,6 @@ return(
     <FeaturedDoctors/>
     <HealthcareServices/>
     <SearchSection/>
-    <BookAppointmentCard/>
     </>
 )
 }

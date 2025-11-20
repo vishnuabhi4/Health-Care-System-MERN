@@ -1,24 +1,27 @@
 import MedicalReport from "../models/medicalReportModel.js";
+import mongoose from "mongoose";
+
 
 // Create new report
-export const createMedicalReportService = async (reportData) => {
-  const report = new MedicalReport(reportData);
+export const createMedicalReportService = async (data) => {
+  const report = new MedicalReport(data);
   return await report.save();
 };
 
 // Get all reports
 export const getAllReportsService = async () => {
   return await MedicalReport.find()
-    .populate("patient", "name email")
-    .populate("doctor", "name specialization")
+    .populate("patient", "username email")
+    .populate("doctor", "username role specialization")
     .populate("appointment");
 };
 
 // Get single report by ID
-export const getReportByIdService = async (reportId) => {
-  return await MedicalReport.findById(reportId)
-    .populate("patient", "name email")
-    .populate("doctor", "name specialization")
+export const getReportByIdService = async (patientId) => {
+
+  return await MedicalReport.findOne({ patient: patientId })
+    .populate("patient", "username email")
+    .populate("doctor", "username role specialization")
     .populate("appointment");
 };
 

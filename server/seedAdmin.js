@@ -19,7 +19,7 @@ const seedAdmin = async () => {
     // check if admin already exists
     const adminExists = await User.findOne({ email: "admin@hospital.com" });
     if (adminExists) {
-      console.log("⚠️ Admin already exists");
+      console.log("Admin already exists");
       process.exit();
     }
 
@@ -32,10 +32,10 @@ const seedAdmin = async () => {
     });
 
     await admin.save();
-    console.log("✅ Super Admin created successfully");
+    console.log("Super Admin created successfully");
     process.exit();
   } catch (err) {
-    console.error("❌ Error seeding admin:", err.message);
+    console.error("Error seeding admin:", err.message);
     process.exit(1);
   }
 };

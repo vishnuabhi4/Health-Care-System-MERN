@@ -3,51 +3,51 @@ import { Star, Calendar } from 'lucide-react';
 
 const FeaturedDoctors = () => {
   const doctors = [
-    {
-      id: 1,
-      name: 'Dr. Sarah Johnson',
-      specialty: 'Cardiologist',
-      rating: 4.9,
-      reviews: 127,
-      experience: '15 years',
-      availability: 'Available Today',
-      image: '/api/placeholder/80/80',
-      consultationFee: '$80'
-    },
-    {
-      id: 2,
-      name: 'Dr. Michael Chen',
-      specialty: 'Neurologist',
-      rating: 4.8,
-      reviews: 98,
-      experience: '12 years',
-      availability: 'Next Available: Tomorrow',
-      image: '/api/placeholder/80/80',
-      consultationFee: '$90'
-    },
-    {
-      id: 3,
-      name: 'Dr. Emily Rodriguez',
-      specialty: 'Pediatrician',
-      rating: 4.9,
-      reviews: 156,
-      experience: '10 years',
-      availability: 'Available Today',
-      image: '/api/placeholder/80/80',
-      consultationFee: '$70'
-    },
-    {
-      id: 4,
-      name: 'Dr. James Wilson',
-      specialty: 'Orthopedist',
-      rating: 4.7,
-      reviews: 89,
-      experience: '18 years',
-      availability: 'Available Tomorrow',
-      image: '/api/placeholder/80/80',
-      consultationFee: '$85'
-    }
-  ];
+  {
+    id: 1,
+    name: 'Dr. Priya Nair',
+    specialty: 'Cardiologist',
+    rating: 4.9,
+    reviews: 142,
+    experience: '14 years',
+    availability: 'Available Today',
+    image: '/api/placeholder/80/80',
+    consultationFee: '₹1200'
+  },
+  {
+    id: 2,
+    name: 'Dr. Arjun Mehta',
+    specialty: 'Neurologist',
+    rating: 4.8,
+    reviews: 101,
+    experience: '11 years',
+    availability: 'Next Available: Tomorrow',
+    image: '/api/placeholder/80/80',
+    consultationFee: '₹1500'
+  },
+  {
+    id: 3,
+    name: 'Dr. Kavya Reddy',
+    specialty: 'Pediatrician',
+    rating: 4.9,
+    reviews: 165,
+    experience: '9 years',
+    availability: 'Available Today',
+    image: '/api/placeholder/80/80',
+    consultationFee: '₹900'
+  },
+  {
+    id: 4,
+    name: 'Dr. Rohit Sharma',
+    specialty: 'Orthopedist',
+    rating: 4.7,
+    reviews: 93,
+    experience: '17 years',
+    availability: 'Available Tomorrow',
+    image: '/api/placeholder/80/80',
+    consultationFee: '₹1100'
+  }
+];
 
   const handleBookAppointment = (doctorId) => {
     console.log(`Booking appointment with doctor ${doctorId}`);
@@ -108,12 +108,7 @@ const FeaturedDoctors = () => {
                 </div>
               </div>
               
-              <button 
-                onClick={() => handleBookAppointment(doctor.id)}
-                className="w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 font-medium transition-colors shadow-md hover:shadow-lg"
-              >
-                Book Appointment
-              </button>
+           
             </div>
           ))}
         </div>

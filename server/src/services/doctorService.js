@@ -24,17 +24,44 @@ export const createDoctorService = async (doctorData) => {
 
   // 4. Create doctor profile
   const doctor = new Doctor(doctorData);
-  return await doctor.save().then(d => d.populate("userId", "username email role"));
+  const savedDoctor = await doctor.save();
+  // return await Doctor.save().then(d => d.populate("userId", "username email role"));
+  return await savedDoctor.populate("userId", "username email role");
 };
 
 export const getAllDoctorsService = async () => {
-  return await Doctor.find().populate("userId", "username email role");
+  const doctors = await User.find({ role: "doctor" }).select("username email role");
+ 
+  return doctors;
 };
 
 export const getDoctorByIdService = async (id) => {
-  return await Doctor.findById(id).populate("userId", "username email role");
+ 
+  return await User.findById(id).populate("userId", "username email role");
+  
 };
 
 export const updateDoctorService = async (id, updateData) => {
-  return await Doctor.findByIdAndUpdate(id, updateData, { new: true });
+  return await User.findByIdAndUpdate(id, updateData, { new: true });
+};
+
+
+export const getDoctorByUserIdService = async (userId) => {
+  // Step 1: Find the user
+  const user = await User.findById(userId).select("username email role");
+  if (!user || user.role !== "doctor") {
+    throw new Error("Doctor user not found");
+  }
+
+  // Step 2: Find doctor info from Doctor collection (linked by userId)
+  const doctor = await Doctor.findOne({ userId })
+    .populate("userId", "username email role") // populate user info
+    .populate("patients", "username email") // populate linked patients if any
+    .lean();
+
+  if (!doctor) {
+    throw new Error("Doctor info not found for this user");
+  }
+
+  return doctor;
 };
