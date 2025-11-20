@@ -15,6 +15,18 @@ const patientSchema = new mongoose.Schema(
       type: String,
       enum: ["male", "female", "other"],
     },
+    bloodGroup: {
+      type: String,
+      enum: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", ""], // optional
+      default: "",
+    },
+    height: {
+      type: Number, // centimeters
+    },
+    bloodPressure: {
+      systolic: Number,
+      diastolic: Number,
+    },
     address: {
       type: String,
       required: true,
@@ -47,6 +59,11 @@ const patientSchema = new mongoose.Schema(
       provider: String,
       policyNumber: String,
       validity: Date,
+    },
+    emergencyContact: {
+      name: String,
+      phone: String,
+      relation: String,
     },
   },
   { timestamps: true }

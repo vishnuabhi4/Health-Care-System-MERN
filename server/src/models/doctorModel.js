@@ -2,17 +2,23 @@ import mongoose from "mongoose";
 
 const doctorSchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: true, 
+      trim: true,
+    },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      index: true,
     },
     specialization: {
       type: String,
       required: true,
     },
     experience: {
-      type: Number, // years
+      type: Number,
       required: true,
     },
     qualification: {
@@ -24,29 +30,21 @@ const doctorSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    schedule: [
-      {
-        day: String, // e.g., "Monday"
-        timeSlots: [String], // ["10:00-11:00", "2:00-3:00"]
-      },
-    ],
-    appointments: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Appointment",
-      },
-    ],
+
+    schedule: {
+      startDate: Date,
+      endDate: Date,
+      days: [String],
+      startTime: String,
+      endTime: String,
+    },
+
     patients: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Patient",
       },
     ],
-    verificationStatus: {
-      type: String,
-      enum: ["pending", "approved", "rejected"],
-      default: "pending",
-    },
   },
   { timestamps: true }
 );
