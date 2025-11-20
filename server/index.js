@@ -28,10 +28,14 @@ app.use(cookieParser()); // for refresh tokens in cookies
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend URL
-    credentials: true, // if sending cookies or auth headers
+    origin: [
+      "http://localhost:5173",
+      "https://health-care-system-frontend.vercel.app"
+    ],
+    credentials: true,
   })
 );
+
 
 app.use('/', (req, res, next) => {
   console.log('primary root');
