@@ -199,7 +199,7 @@ const AddDoctorInfoForm = ({ userId, initialData, setCurrentView }) => {
           <input
             type="text"
             className="col-span-2 border border-gray-300 rounded-lg px-3 py-2"
-            placeholder='Days (e.g. "Monday, Wednesday, Friday")'
+            placeholder='Days (e.g. Monday, Wednesday, Friday)'
             value={formData.schedule.days}
             onChange={(e) =>
               setFormData({
