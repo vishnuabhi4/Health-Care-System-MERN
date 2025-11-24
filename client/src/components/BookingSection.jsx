@@ -100,7 +100,8 @@ const AppointmentBooking = () => {
       const res = await axiosInstance.get(
         `/admin/doctorinfo/${doctorId}/available-slots`
       );
-
+      console.log("setAvailableTimes",res);
+      
       setAvailableDates(res.data.available || []);
       setAvailableTimes([]);
       handleInputChange("date", "");

@@ -1,7 +1,10 @@
 import axios from "axios";
+import dotenv from "dotenv"
+
+
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: "http://localhost:5000/api",
   withCredentials: true, // important for refresh token cookies
 });
 
