@@ -4,7 +4,7 @@ import dotenv from "dotenv"
 
 
 const axiosInstance = axios.create({
-  baseURL: VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true, // important for refresh token cookies
 });
 
