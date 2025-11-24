@@ -31,8 +31,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://health-care-system-frontend.vercel.app",
-      "health-care-system-front-git-e7db80-vishnu-vs-projects-5d5f0a58.vercel.app",
-"health-care-system-frontend-2tlqayvhg.vercel.app"
+      "health-care-system-frontend-rd0jxr9dk.vercel.app",
     ],
     credentials: true,
   })
